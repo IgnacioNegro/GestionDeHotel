@@ -32,7 +32,7 @@ while (!salir)
         if (keyValuePairs.ContainsKey(opcion))
         {
             keyValuePairs[opcion]();
-            Console.WriteLine("Opción ejecutada correctamente.");
+           
         }
         else
         {
