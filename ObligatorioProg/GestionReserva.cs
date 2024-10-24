@@ -10,11 +10,12 @@ namespace ObligatorioProg
     public class GestionReserva
     {
 
-            public List<Reserva> listaReservas;
+            public List<Reserva> listaReservas { get; set; }
 
             public GestionReserva()
             {
 
+                listaReservas=new List<Reserva>();
                 PrecargarReservas();
             }
             public void PrecargarReservas()

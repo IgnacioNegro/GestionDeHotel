@@ -44,7 +44,7 @@ namespace ObligatorioProg
         }
 
 
-        public void ConsultarHabitacionesDisponibles()
+        /*ublic void ConsultarHabitacionesDisponibles()
         {
             Console.Clear();
             Console.WriteLine("Habitaciones Disponibles:");
@@ -65,7 +65,7 @@ namespace ObligatorioProg
             }
 
             Console.ReadLine();
-        }
+        }*/
     }
 
 }
