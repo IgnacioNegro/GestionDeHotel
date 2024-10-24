@@ -38,9 +38,22 @@ public class GestionReservas
         listaHabitaciones.Add(new Habitacion(202, "Suite Deluxe", 4, 500.00m));
         listaHabitaciones.Add(new Habitacion(203, "Doble", 2, 125.50m));
         listaHabitaciones.Add(new Habitacion(204, "Triple", 3, 160.00m));
+        listaHabitaciones.Add(new Habitacion(301, "Simple", 1, 85.00m));
+        listaHabitaciones.Add(new Habitacion(302, "Suite Junior", 2, 280.00m));
+        listaHabitaciones.Add(new Habitacion(303, "Doble", 2, 135.00m));
+        listaHabitaciones.Add(new Habitacion(304, "Suite Presidencial", 5, 1000.00m));
+        listaHabitaciones.Add(new Habitacion(401, "Simple", 1, 90.00m));
+        listaHabitaciones.Add(new Habitacion(402, "Doble Superior", 2, 150.00m));
+        listaHabitaciones.Add(new Habitacion(403, "Triple Deluxe", 3, 200.00m));
+        listaHabitaciones.Add(new Habitacion(404, "Suite Familiar", 4, 450.00m));
+        listaHabitaciones.Add(new Habitacion(501, "Penthouse", 6, 1500.00m));
+        listaHabitaciones.Add(new Habitacion(502, "Simple Económica", 1, 60.00m));
+        listaHabitaciones.Add(new Habitacion(503, "Doble Económica", 2, 100.00m));
+
+
     }
 
-    // Método para precargar reservas
+    // MétodO para precargar reservas
     public void PrecargarReservas()
     {
         listaReservas.Add(new Reserva(101, new DateTime(2024, 10, 25), new DateTime(2024, 10, 28), "juan.perez@example.com"));
@@ -61,7 +74,15 @@ public class GestionReservas
         }
     }
 
-    // Listar habitaciones disponibles en un rango de fechas
+    public void ListarHabitaciones() // Listar todas las habitaciones
+    {
+        foreach (var habitacion in listaHabitaciones)
+        {
+            Console.WriteLine($"Número: {habitacion.NumeroHabitacion}, Tipo: {habitacion.Tipo}, Precio: {habitacion.Precio:C}");
+        }
+    }
+
+    // Listar habitaciones disponibles fechas  determinadas 
     public List<Habitacion> ConsultarHabitacionesDisponibles()
     {
         return listaHabitaciones
@@ -77,6 +98,7 @@ public class GestionReservas
         Menu.MenuPrincipal();
     }
 
+    //ReaLizar Reservas
     public void RealizarReserva()
     {
         Console.Clear();
@@ -93,6 +115,13 @@ public class GestionReservas
         if (!DateTime.TryParse(Console.ReadLine(), out fechaSalida))
         {
             Console.WriteLine("Fecha inválida.");
+            return;
+        }
+
+        // Validación del límite de 30 días
+    if ((fechaSalida - fechaSalida).TotalDays > 30)
+        {
+            Console.WriteLine("No se puede realizar una reserva por más de 30 días.");
             return;
         }
 
@@ -118,6 +147,7 @@ public class GestionReservas
             return;
         }
 
+
         // Validar si la habitación elegida está dentro de las disponibles
         var habitacionSeleccionada = habitacionesDisponibles.FirstOrDefault(h => h.NumeroHabitacion == numeroHabitacion);
 
@@ -127,17 +157,40 @@ public class GestionReservas
             return;
         }
 
+        //requisito de no tener reserva duplicada
+
+        string emailCliente = GestionUsuario.usuarioActual.Email;
+        bool reservaDuplicada = listaReservas.Any(r =>
+            r.EmailCliente == emailCliente &&
+            ((fechaLlegada >= r.FechaInicio && fechaLlegada < r.FechaFin) ||
+             (fechaSalida > r.FechaInicio && fechaSalida <= r.FechaFin))
+        );
+
+        if (reservaDuplicada)
+        {
+            Console.WriteLine("Ya tiene una reserva activa para estas fechas.");
+            Console.ReadLine();
+            return;
+        }
+
         // Crear la reserva y agregarla a la lista
         var nuevaReserva = new Reserva(numeroHabitacion, fechaLlegada, fechaSalida, GestionUsuario.usuarioActual.Email);
         listaReservas.Add(nuevaReserva);
 
-        Console.WriteLine("\nReserva realizada con éxito:");
-        Console.WriteLine($"ID Reserva: {nuevaReserva.IDReserva}, Habitación: {nuevaReserva.NumeroHabitacion}, " +
-                          $"Desde: {nuevaReserva.FechaInicio.ToShortDateString()} Hasta: {nuevaReserva.FechaFin.ToShortDateString()}");
-        Console.WriteLine("Presione cualquier tecla para continuar...");
-        Console.ReadKey();
+        Console.WriteLine("Reserva creada con los siguientes detalles:");
+        Console.WriteLine($"ID Reserva: {nuevaReserva.IDReserva}");
+        Console.WriteLine($"Número de Habitación: {nuevaReserva.NumeroHabitacion}");
+        Console.WriteLine($"Fecha de Llegada: {nuevaReserva.FechaInicio.ToShortDateString()}");
+        Console.WriteLine($"Fecha de Salida: {nuevaReserva.FechaFin.ToShortDateString()}");
+        Console.WriteLine($"Fecha de Reserva: {nuevaReserva.FechaReserva.ToShortDateString()}");
+        Console.WriteLine($"Email del Cliente: {nuevaReserva.EmailCliente}");
+
+        Console.WriteLine("Presione una tecla para continuar.");
+        Console.ReadLine();
+
     }
 
+    //Fijarse si esta disponible
     private bool EsHabitacionDisponible(int numeroHabitacion, DateTime inicio, DateTime fin)
     {
         return !listaReservas.Any(r =>
@@ -146,14 +199,8 @@ public class GestionReservas
             r.FechaFin > inicio);
     }
 
-    // Listar todas las habitaciones
-    public void ListarHabitaciones()
-    {
-        foreach (var habitacion in listaHabitaciones)
-        {
-            Console.WriteLine($"Número: {habitacion.NumeroHabitacion}, Tipo: {habitacion.Tipo}, Precio: {habitacion.Precio:C}");
-        }
-    }
+    
+   
 }
 
 
