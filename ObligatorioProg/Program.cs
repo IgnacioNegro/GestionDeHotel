@@ -1,8 +1,7 @@
 ﻿using ObligatorioProg;
 
 GestionUsuario gestionusuario = new();
-GestionHabitacion gestionhabitacion = new();
-GestionReserva gestionreserva = new();
+GestionReservas gestionreserva = new();
 Menu.MenuIniciarSesion();
 
 bool salir = false;
@@ -17,7 +16,7 @@ Dictionary<int, Action> keyValuePairs = new()
     {6, () => gestionusuario.RegistrarUsuario()},
     {7, () => gestionusuario.IniciarSesion()},
     {8,()=> gestionusuario.RecuperarContrasena() },
- /*   {10, () => gestionhabitacion.ConsultarHabitacionesDisponibles() },*/
+    {10,()=> gestionreserva.ConsultarHabitacionesDisponibles()},
     {11, () => gestionreserva.RealizarReserva() },
     {90, () => gestionreserva.ListarReservas() }
 };

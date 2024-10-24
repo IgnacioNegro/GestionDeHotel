@@ -169,10 +169,6 @@ namespace ObligatorioProg
             listaUsuarios.Add(usuario);
         }
 
-        public List<Usuario> ObtenerListaUsuarios()
-        {
-            return listaUsuarios;
-        }
 
         private void PrecargarUsuarios()
         {

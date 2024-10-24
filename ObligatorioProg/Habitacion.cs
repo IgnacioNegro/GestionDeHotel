@@ -14,12 +14,15 @@ namespace ObligatorioProg
         public int cantidadPersonas { get; set; }
         public decimal Precio { get; set; }
 
+        public bool Disponible { get; set; }
+        public List<DateTime> FechasReservadas { get; set; }
         public Habitacion(int numerohabitacion, string tipo, int cantidadpersonas, decimal precio)
         {
             NumeroHabitacion = numerohabitacion;
             Tipo = tipo;
             cantidadPersonas = cantidadpersonas;
             Precio = precio;
+            FechasReservadas = new List<DateTime>();
         }
     }
 
