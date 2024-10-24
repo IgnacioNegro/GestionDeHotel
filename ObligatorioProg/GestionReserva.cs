@@ -150,7 +150,7 @@ public class GestionReservas
             return;
         }
 
-        // Listar habitaciones disponibles utilizando las fechas capturadas
+        // Listar habitaciones disponibles con las fechas capturadas guardadas en variable
         var habitacionesDisponibles = BuscarHabitacionesDisponiblesParaReserva(fechaLlegada, fechaSalida);
 
         if (habitacionesDisponibles.Count == 0)
@@ -158,7 +158,7 @@ public class GestionReservas
             Console.WriteLine("No hay habitaciones disponibles para las fechas seleccionadas.");
             return;
         }
-        Console.WriteLine("\nSeleccione el número de habitación de las disponibles:");
+        Console.WriteLine("Seleccione el número de habitación de las disponibles:");
         foreach (var habitacion in habitacionesDisponibles)
         {
             Console.WriteLine($"Número: {habitacion.NumeroHabitacion}, Tipo: {habitacion.Tipo}, Precio: {habitacion.Precio:C}");
@@ -172,7 +172,7 @@ public class GestionReservas
         }
 
 
-        // Validar si la habitación elegida está dentro de las disponibles
+        // verra si la habitación elegida está dentro de las disponibles
         var habitacionSeleccionada = habitacionesDisponibles.FirstOrDefault(h => h.NumeroHabitacion == numeroHabitacion);
 
         if (habitacionSeleccionada == null)
@@ -213,16 +213,4 @@ public class GestionReservas
         Console.ReadLine();
 
     }
-
-    //Fijarse si esta disponible
-    private bool EsHabitacionDisponible(int numeroHabitacion, DateTime inicio, DateTime fin)
-    {
-        return !listaReservas.Any(r =>
-            r.NumeroHabitacion == numeroHabitacion &&
-            r.FechaInicio < fin &&
-            r.FechaFin > inicio);
-    }
-
-    
-   
 }
