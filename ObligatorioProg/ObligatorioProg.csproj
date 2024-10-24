@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Pago.cs" />
+    <Compile Remove="Servicios.cs" />
+    <Compile Remove="ServiciosPagos.cs" />
+  </ItemGroup>
+
 </Project>

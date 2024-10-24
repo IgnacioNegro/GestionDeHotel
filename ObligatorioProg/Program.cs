@@ -2,9 +2,8 @@
 
 GestionUsuario gestionusuario = new();
 GestionHabitacion gestionhabitacion = new();
+GestionReserva gestionreserva = new();
 Menu.MenuIniciarSesion();
-new Precarga(gestionusuario, gestionhabitacion);
-
 
 bool salir = false;
 Dictionary<int, Action> keyValuePairs = new()
@@ -15,9 +14,12 @@ Dictionary<int, Action> keyValuePairs = new()
     { 3, () => Menu.MenuPrincipal() },
     { 4, () => Menu.GestionDePagos() },
     { 5, () => Menu.MenuPrincipal() },
-    {6, () => gestionusuario.IngresarUsuario()},
+    {6, () => gestionusuario.RegistrarUsuario()},
     {7, () => gestionusuario.IniciarSesion()},
-    {10, () => gestionhabitacion.ListarHabitaciones() }
+    {8,()=> gestionusuario.RecuperarContrasena() },
+    {10, () => gestionhabitacion.ConsultarHabitacionesDisponibles() },
+    {11, () => gestionreserva.RealizarReserva() },
+    {90, () => gestionreserva.ListarReservas() }
 };
 
 
@@ -31,6 +33,7 @@ while (!salir)
         if (keyValuePairs.ContainsKey(opcion))
         {
             keyValuePairs[opcion]();
+            Console.WriteLine("Opción ejecutada correctamente.");
         }
         else
         {
@@ -44,8 +47,5 @@ while (!salir)
 
 
 }
-
-Habitacion habitacion1 = new Habitacion(129, "suite", 4, 10m);
-Reserva nuevareserva = new Reserva(102,new DateTime(2024, 11, 20),new DateTime(2024, 11, 22),"pedro.martinez@example.com");
 
 

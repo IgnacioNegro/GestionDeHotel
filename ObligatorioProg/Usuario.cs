@@ -12,7 +12,6 @@ namespace ObligatorioProg
         public int Id { get; private set; }
         public string? Contrasena { get; set; }
 
-        // Constructor
         public Usuario(string nombre, string apellido, DateTime fechaNacimiento, string email,
                        string pais, string tipoDocumento, int numeroDocumento, int telefono, string contraseña)
             : base(nombre, apellido, fechaNacimiento, email, pais, tipoDocumento, numeroDocumento, telefono)
