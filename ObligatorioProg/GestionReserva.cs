@@ -115,12 +115,7 @@ public class GestionReservas
     // Listar habitaciones disponibles fechas  determinadas  para el metodo realizar reserva, por eso es privada.
     private List<Habitacion> BuscarHabitacionesDisponiblesParaReserva(DateTime fechaLlegada, DateTime fechaSalida)
     {
-        return listaHabitaciones
-            .Where(h => !listaReservas.Any(r =>
-                r.NumeroHabitacion == h.NumeroHabitacion &&
-                r.FechaInicio < fechaSalida &&
-                r.FechaFin > fechaLlegada))
-            .ToList();
+        return listaHabitaciones.Where(h => !listaReservas.Any(r =>r.NumeroHabitacion == h.NumeroHabitacion &&r.FechaInicio < fechaSalida &&r.FechaFin > fechaLlegada)).ToList();
     }
 
     //ReaLizar Reservas

@@ -203,6 +203,7 @@ namespace ObligatorioProg
 
                 Console.WriteLine("Presione una tecla para continuar:");
                 Console.ReadLine();
+                Menu.MenuPrincipal();
             }
             
          
