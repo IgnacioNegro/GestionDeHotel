@@ -172,16 +172,15 @@ namespace ObligatorioProg
 
         private void PrecargarUsuarios()
         {
-            listaUsuarios.AddRange(new List<Usuario>
-            {
-                new Usuario("Juan", "Pérez", new DateTime(1990, 1, 10), "juan.perez@example.com", "Uruguay", "CI", 12345678, 987654321, "password123"),
-                new Usuario("María", "González", new DateTime(1995, 2, 20), "maria.gonzalez@example.com", "Argentina", "DNI", 87654321, 987123456, "mariaPass!"),
-                new Usuario("Carlos", "López", new DateTime(1988, 3, 15), "carlos.lopez@example.com", "Chile", "RUT", 11223344, 987654123, "carlosSecure"),
-                new Usuario("Ana", "Rodríguez", new DateTime(1992, 4, 25), "ana.rodriguez@example.com", "Perú", "DNI", 44332211, 985632147, "ana456"),
-                new Usuario("Pedro", "Martínez", new DateTime(1985, 5, 5), "pedro.martinez@example.com", "Brasil", "CPF", 99887766, 984563214, "pedro@mart"),
-                new Usuario("Admin", "Admin", new DateTime(1985, 5, 5), "admin", "Brasil", "CPF", 99887766, 984563214, "admin")
-            });
+            listaUsuarios.Add(new Usuario("Juan", "Pérez", new DateTime(1990, 1, 10), "juan.perez@example.com", "Uruguay", "CI", 12345678, 987654321, "password123"));
+            listaUsuarios.Add(new Usuario("María", "González", new DateTime(1995, 2, 20), "maria.gonzalez@example.com", "Argentina", "DNI", 87654321, 987123456, "mariaPass!"));
+            listaUsuarios.Add(new Usuario("Carlos", "López", new DateTime(1988, 3, 15), "carlos.lopez@example.com", "Chile", "RUT", 11223344, 987654123, "carlosSecure"));
+            listaUsuarios.Add(new Usuario("Ana", "Rodríguez", new DateTime(1992, 4, 25), "ana.rodriguez@example.com", "Perú", "DNI", 44332211, 985632147, "ana456"));
+            listaUsuarios.Add(new Usuario("Pedro", "Martínez", new DateTime(1985, 5, 5), "pedro.martinez@example.com", "Brasil", "CPF", 99887766, 984563214, "pedro@mart"));
+            listaUsuarios.Add(new Usuario("Admin", "Admin", new DateTime(1985, 5, 5), "admin", "Brasil", "CPF", 99887766, 984563214, "admin"));
         }
+    
+       
 
         public void RecuperarContrasena()
         {
@@ -191,22 +190,22 @@ namespace ObligatorioProg
             Console.Write("Ingrese su email: ");
             string? email = Console.ReadLine();
 
+            foreach (var usuario in listaUsuarios)
+            {
+                if (email == usuario.Email)
+                { Console.WriteLine($"{usuario.Contrasena}"); }
+
+                else
+                {
+                    Console.WriteLine("No se encontró un usuario con ese email.");
+                    return;
+                }
+
+                Console.WriteLine("Presione una tecla para continuar:");
+                Console.ReadLine();
+            }
             
-            Usuario usuario = listaUsuarios.FirstOrDefault(u => u.Email == email);
-
-            if (usuario != null)
-            {
-                
-                Console.WriteLine($"Su contraseña es: {usuario.Contrasena}");
-                Menu.MenuPrincipal();
-            }
-            else
-            {
-                Console.WriteLine("No se encontró un usuario con ese email.");
-            }
-
-            Console.WriteLine("Presione una tecla para continuar:");
-            Console.ReadLine();
+         
         }
     }
 
