@@ -9,6 +9,7 @@ namespace ObligatorioProg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 public class GestionReservas
 {
@@ -115,7 +116,7 @@ public class GestionReservas
     // Listar habitaciones disponibles fechas  determinadas  para el metodo realizar reserva, por eso es privada.
     private List<Habitacion> BuscarHabitacionesDisponiblesParaReserva(DateTime fechaLlegada, DateTime fechaSalida)
     {
-        return listaHabitaciones.Where(h => !listaReservas.Any(r =>r.NumeroHabitacion == h.NumeroHabitacion &&r.FechaInicio < fechaSalida &&r.FechaFin > fechaLlegada)).ToList();
+        return listaHabitaciones.Where(h => !listaReservas.Any(r => r.NumeroHabitacion == h.NumeroHabitacion && r.FechaInicio < fechaSalida && r.FechaFin > fechaLlegada)).ToList();
     }
 
     //ReaLizar Reservas
@@ -139,13 +140,13 @@ public class GestionReservas
         }
 
         // Validación del límite de 30 días
-    if ((fechaSalida - fechaLlegada).TotalDays > 30)
+        if ((fechaSalida - fechaLlegada).TotalDays > 30)
         {
             Console.WriteLine("No se puede realizar una reserva por más de 30 días.");
             return;
         }
 
-        // Listar habitaciones disponibles con las fechas capturadas guardadas en la variable fecha llegada y fecha salida
+
         var habitacionesDisponibles = BuscarHabitacionesDisponiblesParaReserva(fechaLlegada, fechaSalida);
 
         if (habitacionesDisponibles.Count == 0)
@@ -208,4 +209,122 @@ public class GestionReservas
         Console.ReadLine();
 
     }
-}
+
+
+    public void CancelarReserva()
+    {
+        Console.Clear();
+        Console.WriteLine("Ingrese su email:");
+        string? email = Console.ReadLine();
+        var reservasCliente = listaReservas.Where(r => r.EmailCliente == email).ToList();
+
+        if (reservasCliente.Count == 0)
+        {
+            Console.WriteLine("No se encontraron reservas para este email.");
+            return;
+        }
+
+
+        Console.WriteLine("Reservas encontradas:");
+        foreach (var reserva in reservasCliente)
+        {
+            Console.WriteLine($"ID: {reserva.IDReserva}, Habitación: {reserva.NumeroHabitacion}, Cliente: {reserva.EmailCliente}, " +
+                              $"Desde: {reserva.FechaInicio.ToShortDateString()} Hasta: {reserva.FechaFin.ToShortDateString()}");
+        }
+
+        Console.WriteLine("Ingrese el ID de la reserva que desea eliminar:");
+        string? input = Console.ReadLine();
+
+        if (int.TryParse(input, out int idReserva))
+        {
+
+            var reservaAEliminar = reservasCliente.FirstOrDefault(r => r.IDReserva == idReserva);
+
+            if (reservaAEliminar != null)
+            {
+                listaReservas.Remove(reservaAEliminar);
+                Console.WriteLine("La reserva ha sido eliminada exitosamente.");
+                Console.WriteLine("Ingrese una tecla para continuar");
+                Console.ReadLine();
+                Menu.MenuPrincipal();
+            }
+            else
+            {
+                Console.WriteLine("ID de reserva no encontrado.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("ID inválido. Por favor, ingrese un número válido.");
+        }
+
+        Console.ReadLine();
+        Menu.MenuPrincipal();
+    }
+
+    public void ModificarReserva()
+    {
+        Console.Clear();
+        Console.WriteLine("Ingrese su email:");
+        string? email = Console.ReadLine();
+        var reservasCliente = listaReservas.Where(r => r.EmailCliente == email).ToList();
+
+        if (reservasCliente.Count == 0)
+        {
+            Console.WriteLine("No se encontraron reservas para este email.");
+            return;
+        }
+
+
+        Console.WriteLine("Reservas encontradas:");
+        foreach (var reserva in reservasCliente)
+        {
+            Console.WriteLine($"ID: {reserva.IDReserva}, Habitación: {reserva.NumeroHabitacion}, Cliente: {reserva.EmailCliente}, " +
+                              $"Desde: {reserva.FechaInicio.ToShortDateString()} Hasta: {reserva.FechaFin.ToShortDateString()}");
+        }
+
+        Console.WriteLine("Ingrese el ID de la reserva que desea modificar:");
+        string? input = Console.ReadLine();
+
+        if (int.TryParse(input, out int idReserva))
+        {
+
+            var reserva = reservasCliente.FirstOrDefault(r => r.IDReserva == idReserva);
+
+            if (reserva != null)
+            {
+                Console.WriteLine($"Reserva encontrada: ID {reserva.IDReserva}, Habitación {reserva.NumeroHabitacion}, " +
+                           $"Desde {reserva.FechaInicio.ToShortDateString()} Hasta {reserva.FechaFin.ToShortDateString()}");
+            }
+
+            Console.WriteLine("Ingrese el NUEVO número de habitación");
+            string? numhab = Console.ReadLine();
+            if (int.TryParse(numhab, out int numHabitacion))
+            {
+                reserva.NumeroHabitacion = numHabitacion;
+                   
+            }
+
+            Console.WriteLine("Ingrese la nueva fecha de inicio dd/mm/yyyy");
+            string? nuevaFechaInicio = Console.ReadLine();
+            if (DateTime.TryParse(nuevaFechaInicio, out DateTime fechanuevainicio))
+            {
+                reserva.FechaInicio = fechanuevainicio;
+            }
+
+            Console.WriteLine("Ingrese la nueva fecha de fin dd/mm/yyyy");
+            string? nuevaFechaFin = Console.ReadLine();
+            if (DateTime.TryParse(nuevaFechaFin, out DateTime fechanuevafin
+                ))
+            {
+                reserva.FechaFin = fechanuevafin;
+            }
+
+            Console.WriteLine("Reserva modificada exitosamente.");
+        }
+
+
+        Console.ReadLine();
+            Menu.MenuPrincipal();
+        }
+    }

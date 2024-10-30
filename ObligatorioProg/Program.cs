@@ -1,4 +1,5 @@
 ﻿using ObligatorioProg;
+using System.Reflection.Metadata.Ecma335;
 
 GestionUsuario gestionusuario = new();
 GestionReservas gestionreserva = new();
@@ -18,12 +19,44 @@ Dictionary<int, Action> keyValuePairs = new()
     {8,()=> gestionusuario.RecuperarContrasena() },
     {10,()=> gestionreserva.ConsultarHabitacionesDisponibles()},
     {11, () => gestionreserva.RealizarReserva() },
+    {12, () => gestionreserva.ModificarReserva() },
+    {13, () => gestionreserva.CancelarReserva() },
     {90, () => gestionreserva.ListarReservas() }
 };
 
 
+/*while (!salir)
+{
+    string? input = Console.ReadLine();
 
-while (!salir)
+    if (int.TryParse(input, out int opcion))
+    {
+        if (estaEnMenuPrincipal() && opcion != 6 && opcion != 7 && opcion != 3)
+        {
+            Console.WriteLine("Opción no válida en el menú de Inicio de Sesión.");
+            continue; 
+        }
+
+        if (keyValuePairs.ContainsKey(opcion))
+        {
+            keyValuePairs[opcion]();
+        }
+        else
+        {
+            Console.WriteLine("Opción no válida.");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Por favor ingresa un número válido dentro de las opciones.");
+    }
+
+    bool estaEnMenuPrincipal()
+    {
+        return true;
+    }
+}*/
+while (!salir)  
 {
     string? input = Console.ReadLine();
 
@@ -46,5 +79,4 @@ while (!salir)
 
 
 }
-
 

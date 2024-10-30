@@ -8,7 +8,7 @@ namespace ObligatorioProg
 {
     public class Reserva
     {
-        private int IDgenerador = 5000;
+        private static int IDgenerador = 5000;
         public int IDReserva { get; private set; }
 
         public int NumeroHabitacion { get; set; }
