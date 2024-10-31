@@ -21,8 +21,14 @@ Dictionary<int, Action> keyValuePairs = new()
     {11, () => gestionreserva.RealizarReserva() },
     {12, () => gestionreserva.ModificarReserva() },
     {13, () => gestionreserva.CancelarReserva() },
+     {14, () => gestionreserva.EjecutarPago() },
+    {17, () => gestionreserva.ListarHuespedes() },
+    {18, () => gestionreserva.ConsultarHabitacionesDisponibles() },
+    {19, () => gestionreserva.MostrarHistorialReservas() },
     {90, () => gestionreserva.ListarReservas() }
+
 };
+
 
 
 /*while (!salir)

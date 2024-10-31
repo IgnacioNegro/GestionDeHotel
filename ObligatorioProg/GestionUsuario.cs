@@ -179,8 +179,9 @@ namespace ObligatorioProg
             listaUsuarios.Add(new Usuario("Pedro", "Martínez", new DateTime(1985, 5, 5), "pedro.martinez@example.com", "Brasil", "CPF", 99887766, 984563214, "pedro@mart"));
             listaUsuarios.Add(new Usuario("Admin", "Admin", new DateTime(1985, 5, 5), "admin", "Brasil", "CPF", 99887766, 984563214, "admin"));
         }
-    
-       
+
+
+   
 
         public void RecuperarContrasena()
         {

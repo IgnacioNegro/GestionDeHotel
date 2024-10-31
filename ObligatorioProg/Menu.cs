@@ -51,7 +51,6 @@ namespace ObligatorioProg
             Console.WriteLine("6. Ingresar un usuario");
             Console.WriteLine("7. Iniciar Sesion");
             Console.WriteLine("8. Recuperar Contraseña");
-            Console.WriteLine("9. Estadisticas y Reportes");
             Console.WriteLine("5. Volver al menu principal");
 
         }
@@ -74,7 +73,6 @@ namespace ObligatorioProg
             Console.WriteLine("GESTION DE PAGOS");
             Console.WriteLine(" ");
             Console.WriteLine("14. Realizar Pago");
-            Console.WriteLine("15. Emitir Comprobante"); ;
             Console.WriteLine("5. Volver al menu Principal");
 
         }

@@ -27,6 +27,8 @@ public class GestionReservas
         PrecargarReservas();
     }
 
+ 
+
     // Método para precargar las habitaciones
     private void PrecargarHabitaciones()
     {
@@ -62,6 +64,8 @@ public class GestionReservas
         listaReservas.Add(new Reserva(103, new DateTime(2024, 10, 30), new DateTime(2024, 11, 2), "carlos.lopez@example.com"));
         listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 15), new DateTime(2024, 12, 20), "ana.rodriguez@example.com"));
         listaReservas.Add(new Reserva(201, new DateTime(2025, 1, 5), new DateTime(2025, 1, 10), "pedro.martinez@example.com"));
+        listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 25), new DateTime(2025, 2, 20), "admin"));
+        listaReservas.Add(new Reserva(204, new DateTime(2025, 1, 25), new DateTime(2025, 1, 30), "admin"));
     }
 
     // Listar las reservas actuales
@@ -83,7 +87,7 @@ public class GestionReservas
         }
     }
 
-    //opcion 10 del menu, consultar habitaciones no neresrvadas
+    //opcion 10 del menu y se repite en estadisticas , consultar habitaciones no neresrvadas
     public void ConsultarHabitacionesDisponibles()
     {
         Console.Clear();
@@ -302,7 +306,7 @@ public class GestionReservas
             if (int.TryParse(numhab, out int numHabitacion))
             {
                 reserva.NumeroHabitacion = numHabitacion;
-                   
+
             }
 
             Console.WriteLine("Ingrese la nueva fecha de inicio dd/mm/yyyy");
@@ -325,6 +329,118 @@ public class GestionReservas
 
 
         Console.ReadLine();
-            Menu.MenuPrincipal();
+        Menu.MenuPrincipal();
+    }
+
+    public void ListarHuespedes()
+
+    {
+        Console.Clear();
+        var reservasOrdenadas = listaReservas.OrderBy(usuario => usuario.EmailCliente);
+        foreach (var huesped in reservasOrdenadas)
+        {
+            Console.WriteLine($"El usuario {huesped.EmailCliente} tiene una reserva {huesped.IDReserva}");
         }
     }
+
+
+    public List<Reserva> ObtenerHistorialReservasPorEmail(string email)
+    {
+        return listaReservas.Where(reserva => reserva.EmailCliente == email).ToList();
+    }
+
+    public void MostrarHistorialReservas()
+    {
+
+        
+        Console.Clear();
+        if (GestionUsuario.usuarioActual == null)
+        {
+            Console.WriteLine("No hay un usuario logueado.");
+            return;
+        }
+
+        string email = GestionUsuario.usuarioActual.Email;
+        var historial = ObtenerHistorialReservasPorEmail(email);
+
+        if (historial.Count == 0)
+        {
+            Console.WriteLine("No hay reservas registradas para este usuario.");
+            return;
+        }
+
+        Console.WriteLine("Historial de Reservas:");
+        foreach (var reserva in historial)
+        {
+            Console.WriteLine($"ID Reserva: {reserva.IDReserva}, Número de Habitación: {reserva.NumeroHabitacion}, " +
+                              $"Fecha de Inicio: {reserva.FechaInicio.ToShortDateString()}, " +
+                              $"Fecha de Fin: {reserva.FechaFin.ToShortDateString()}, " +
+                              $"Email del Cliente: {reserva.EmailCliente}");
+
+        }
+        Console.WriteLine("Digite una tecla para continuar");
+        Console.ReadLine();
+        Menu.MenuPrincipal();
+    }
+
+
+    public void EjecutarPago()
+    {
+        Console.Write("Ingrese el número de reserva que desea pagar: ");
+        string? numeror = Console.ReadLine();
+        if (int.TryParse(numeror, out int numeroReserva))
+        {
+            var reserva = listaReservas.FirstOrDefault(r => r.IDReserva == numeroReserva);
+            if (reserva == null)
+            {
+                Console.WriteLine("Reserva no encontrada");
+                return;
+            }
+
+            Console.WriteLine("Ingrese su numero de tarjeta de crédito, o cuenta bancaria para confirmar el pagamento");
+            string numerotarjeta= Console.ReadLine();
+            reserva.EstaPagada = true;
+            Console.WriteLine($"Pago realizado para la reserva {numeroReserva}. La reserva se encuentra confirmada y pagada.");
+            GenerarComprobanteDePago(reserva);
+        }
+        else
+        {
+            Console.WriteLine("Número de reserva inválido. Por favor, ingrese un número válido.");
+        }
+
+
+
+        Console.WriteLine("Ingrese una letra para continuar");
+        Console.ReadLine();
+        Menu.MenuPrincipal();
+    }
+
+
+
+    public void GenerarComprobanteDePago(Reserva reserva)
+    {
+
+        Console.Clear();
+        string comprobante = "Comprobante de Pago\n" +
+                         "-------------------------------\n" +
+                         "Número de Reserva: " + reserva.IDReserva + "\n" +
+                         "Fechas: Desde " + reserva.FechaInicio.ToShortDateString() +
+                         " Hasta " + reserva.FechaFin.ToShortDateString() + "\n" +
+                         "Email: " + reserva.EmailCliente + "\n" +
+                         "Estado: " + (reserva.EstaPagada ? "Pagada" : "Pendiente") + "\n" +
+                         "-------------------------------\n";
+
+        Console.WriteLine(comprobante);
+        Console.WriteLine("Ingrese una letra para continuar");
+        Console.ReadLine();
+        Menu.MenuPrincipal();
+
+    }
+
+  /*  public void HabitacionesMasReservadas()
+    {
+       
+    }*/
+}
+
+

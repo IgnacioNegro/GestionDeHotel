@@ -14,27 +14,30 @@ namespace ObligatorioProg
         public int NumeroHabitacion { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-
+        public string EmailCliente { get; private set; }
         public DateTime FechaReserva { get; set; }
-        public string EmailCliente { get; set; }
+        private int UsuarioId { get; }
+        public bool EstaPagada { get; set; }
 
-        public Reserva(int numerohabitacion, DateTime fechainicio, DateTime fechafin, DateTime Fechareserva, string email)
+        public Reserva(int numerohabitacion, DateTime fechainicio, DateTime fechafin, DateTime Fechareserva, string emailCliente)
         {
             IDReserva = IDgenerador++;
             NumeroHabitacion = numerohabitacion;
             FechaInicio = fechainicio;
             FechaFin = fechafin;
-            EmailCliente = email;
             FechaReserva = Fechareserva;
+            EmailCliente = emailCliente;
+            EstaPagada = false;
         }
 
-        public Reserva(int numerohabitacion, DateTime fechainicio, DateTime fechafin, string email)
+        public Reserva(int numerohabitacion, DateTime fechainicio, DateTime fechafin, string emailCliente)
         {
             IDReserva = IDgenerador++;
             NumeroHabitacion = numerohabitacion;
             FechaInicio = fechainicio;
             FechaFin = fechafin;
-            EmailCliente = email;
+            EmailCliente = emailCliente;
+            EstaPagada = false;
 
         }
     }
