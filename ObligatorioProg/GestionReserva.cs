@@ -64,6 +64,7 @@ public class GestionReservas
         listaReservas.Add(new Reserva(103, new DateTime(2024, 10, 30), new DateTime(2024, 11, 2), "carlos.lopez@example.com"));
         listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 15), new DateTime(2024, 12, 20), "ana.rodriguez@example.com"));
         listaReservas.Add(new Reserva(201, new DateTime(2025, 1, 5), new DateTime(2025, 1, 10), "pedro.martinez@example.com"));
+        listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 5), new DateTime(2025, 2, 10), "pedro.martinez@example.com"));
         listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 25), new DateTime(2025, 2, 20), "admin"));
         listaReservas.Add(new Reserva(204, new DateTime(2025, 1, 25), new DateTime(2025, 1, 30), "admin"));
     }
@@ -332,17 +333,21 @@ public class GestionReservas
         Menu.MenuPrincipal();
     }
 
-    public void ListarHuespedes()
+  /*  public void ListarHuespedes()
 
     {
         Console.Clear();
-        var reservasOrdenadas = listaReservas.OrderBy(usuario => usuario.EmailCliente);
+        var fechaHoy = Datenow.Today;
+        var reservasOrdenadas = listaReservas
+             .Where(reserva => reserva.FechaInicio <= fechaHoy && reserva.FechaFin >= fechaHoy && reserva.EstaPagada)
+             .OrderBy(usuario => usuario.EmailCliente); 
         foreach (var huesped in reservasOrdenadas)
         {
+
             Console.WriteLine($"El usuario {huesped.EmailCliente} tiene una reserva {huesped.IDReserva}");
         }
     }
-
+*/
 
     public List<Reserva> ObtenerHistorialReservasPorEmail(string email)
     {
