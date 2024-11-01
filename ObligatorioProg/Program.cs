@@ -11,8 +11,8 @@ Dictionary<int, Action> keyValuePairs = new()
     { 0, () => salir = true },
     { 1, () => Menu.GestionUsuarios() },
     { 2, () => Menu.ReservasyCancelaciones() },
-    { 3, () => Menu.MenuPrincipal() },
-    { 4, () => Menu.GestionDePagos() },
+    { 3, () => Menu.GestionDePagos() },
+    { 4, () => Menu.EstadisticaYReportes() },
     { 5, () => Menu.MenuPrincipal() },
     {6, () => gestionusuario.RegistrarUsuario()},
     {7, () => gestionusuario.IniciarSesion()},
@@ -21,10 +21,11 @@ Dictionary<int, Action> keyValuePairs = new()
     {11, () => gestionreserva.RealizarReserva() },
     {12, () => gestionreserva.ModificarReserva() },
     {13, () => gestionreserva.CancelarReserva() },
-     {14, () => gestionreserva.EjecutarPago() },
+    {14, () => gestionreserva.EjecutarPago() },
     {17, () => gestionreserva.ListarHuespedes() },
     {18, () => gestionreserva.ConsultarHabitacionesDisponibles() },
     {19, () => gestionreserva.MostrarHistorialReservas() },
+    {20, () => gestionreserva.MostrarHabitacionesMasReservadas() },
     {90, () => gestionreserva.ListarReservas() }
 
 };
@@ -70,9 +71,8 @@ while (!salir)
     {
         if (keyValuePairs.ContainsKey(opcion))
         {
-            keyValuePairs[opcion]();
-           
-        }
+         keyValuePairs[opcion]();
+         }
         else
         {
             Console.WriteLine("Opción no válida");

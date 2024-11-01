@@ -437,10 +437,27 @@ public class GestionReservas
 
     }
 
-  /*  public void HabitacionesMasReservadas()
+    public void MostrarHabitacionesMasReservadas()
     {
-       
-    }*/
+        Console.Clear();
+        List<Habitacion> habitacionesMasReservadas = new List<Habitacion>();
+        Console.WriteLine("Las habitaciones mas reservadas son:");
+        foreach (var habitacion in listaHabitaciones)
+        {
+      
+            int conteoReservas = listaReservas.Where(r => r.NumeroHabitacion == habitacion.NumeroHabitacion).Count();
+
+            if (conteoReservas > 1)
+            {
+                
+                Console.WriteLine($"Habitación {habitacion.NumeroHabitacion}: {conteoReservas} reservas");
+            }
+        }
+    }
+    /*  public void HabitacionesMasReservadas()
+      {
+
+      }*/
 }
 
 
