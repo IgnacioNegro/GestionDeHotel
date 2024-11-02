@@ -27,7 +27,7 @@ public class GestionReservas
         PrecargarReservas();
     }
 
- 
+
 
     // Método para precargar las habitaciones
     private void PrecargarHabitaciones()
@@ -63,9 +63,11 @@ public class GestionReservas
         listaReservas.Add(new Reserva(102, new DateTime(2024, 11, 1), new DateTime(2024, 11, 5), "maria.gonzalez@example.com"));
         listaReservas.Add(new Reserva(103, new DateTime(2024, 10, 30), new DateTime(2024, 11, 2), "carlos.lopez@example.com"));
         listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 15), new DateTime(2024, 12, 20), "ana.rodriguez@example.com"));
+        listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 22), new DateTime(2024, 12, 28), "ana.rodriguez@example.com"));
         listaReservas.Add(new Reserva(201, new DateTime(2025, 1, 5), new DateTime(2025, 1, 10), "pedro.martinez@example.com"));
         listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 5), new DateTime(2025, 2, 10), "pedro.martinez@example.com"));
-        listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 25), new DateTime(2025, 2, 20), "admin"));
+        listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 20), new DateTime(2025, 2, 25), "admin"));
+        listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 1), new DateTime(2024, 2, 5), "maria.gonzalez@example.com"));
         listaReservas.Add(new Reserva(204, new DateTime(2025, 1, 25), new DateTime(2025, 1, 30), "admin"));
     }
 
@@ -333,21 +335,20 @@ public class GestionReservas
         Menu.MenuPrincipal();
     }
 
-  /*  public void ListarHuespedes()
-
+    public void ListarHuespedes()
     {
         Console.Clear();
-        var fechaHoy = Datenow.Today;
-        var reservasOrdenadas = listaReservas
-             .Where(reserva => reserva.FechaInicio <= fechaHoy && reserva.FechaFin >= fechaHoy && reserva.EstaPagada)
-             .OrderBy(usuario => usuario.EmailCliente); 
-        foreach (var huesped in reservasOrdenadas)
-        {
+        DateTime fechaHoy = DateTime.Today;
 
-            Console.WriteLine($"El usuario {huesped.EmailCliente} tiene una reserva {huesped.IDReserva}");
+        foreach (var reserva in listaReservas)
+        {
+            if (reserva.FechaInicio <= fechaHoy && reserva.FechaFin >= fechaHoy && reserva.EstaPagada)
+            {
+
+                Console.WriteLine($"El usuario {reserva.EmailCliente} tiene una reserva {reserva.IDReserva}");
+            }
         }
     }
-*/
 
     public List<Reserva> ObtenerHistorialReservasPorEmail(string email)
     {
@@ -357,7 +358,7 @@ public class GestionReservas
     public void MostrarHistorialReservas()
     {
 
-        
+
         Console.Clear();
         if (GestionUsuario.usuarioActual == null)
         {
@@ -403,7 +404,7 @@ public class GestionReservas
             }
 
             Console.WriteLine("Ingrese su numero de tarjeta de crédito, o cuenta bancaria para confirmar el pagamento");
-            string numerotarjeta= Console.ReadLine();
+            string numerotarjeta = Console.ReadLine();
             reserva.EstaPagada = true;
             Console.WriteLine($"Pago realizado para la reserva {numeroReserva}. La reserva se encuentra confirmada y pagada.");
             GenerarComprobanteDePago(reserva);
@@ -449,20 +450,16 @@ public class GestionReservas
         Console.WriteLine("Las habitaciones mas reservadas son:");
         foreach (var habitacion in listaHabitaciones)
         {
-      
+
             int conteoReservas = listaReservas.Where(r => r.NumeroHabitacion == habitacion.NumeroHabitacion).Count();
 
             if (conteoReservas > 1)
             {
-                
+
                 Console.WriteLine($"Habitación {habitacion.NumeroHabitacion}: {conteoReservas} reservas");
             }
         }
     }
-    /*  public void HabitacionesMasReservadas()
-      {
-
-      }*/
 }
 
-
+    
