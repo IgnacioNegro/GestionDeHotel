@@ -6,6 +6,7 @@ GestionReservas gestionreserva = new();
 Menu.MenuIniciarSesion();
 
 bool salir = false;
+
 Dictionary<int, Action> keyValuePairs = new()
 {
     { 0, () => salir = true },
@@ -32,21 +33,29 @@ Dictionary<int, Action> keyValuePairs = new()
 
 
 
-/*while (!salir)
+while (!salir)
 {
     string? input = Console.ReadLine();
 
     if (int.TryParse(input, out int opcion))
     {
-        if (estaEnMenuPrincipal() && opcion != 6 && opcion != 7 && opcion != 3)
+       
+        if (!Menu.SesionIniciada)
         {
-            Console.WriteLine("Opción no válida en el menú de Inicio de Sesión.");
-            continue; 
+            if (opcion != 6 && opcion != 7 && opcion != 3)
+            {
+                Console.WriteLine("Opción no válida en el menú de Inicio de Sesión.");
+                continue;
+            }
         }
 
         if (keyValuePairs.ContainsKey(opcion))
         {
             keyValuePairs[opcion]();
+            if (opcion == 7) 
+            {
+                Menu.SesionIniciada = true; 
+            }
         }
         else
         {
@@ -57,13 +66,8 @@ Dictionary<int, Action> keyValuePairs = new()
     {
         Console.WriteLine("Por favor ingresa un número válido dentro de las opciones.");
     }
-
-    bool estaEnMenuPrincipal()
-    {
-        return true;
-    }
-}*/
-while (!salir)  
+}
+/*while (!salir)  PRIMER MENU SIN VALIDACION DE OPCIONES
 {
     string? input = Console.ReadLine();
 
@@ -85,4 +89,4 @@ while (!salir)
 
 
 }
-
+*/

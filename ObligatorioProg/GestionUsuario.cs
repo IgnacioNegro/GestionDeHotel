@@ -186,37 +186,57 @@ namespace ObligatorioProg
         }
 
 
-   
+
 
         public void RecuperarContrasena()
         {
             Console.Clear();
             Console.WriteLine("Recuperar Contraseña");
 
-            Console.Write("Ingrese su email: ");
-            string? email = Console.ReadLine();
-
-            foreach (var usuario in listaUsuarios)
+            try
             {
-                if (email == usuario.Email)
-                { Console.WriteLine($"{usuario.Contrasena}"); }
+                Console.Write("Ingrese su email: ");
+                string? email = Console.ReadLine();
 
-                else
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    throw new ArgumentException("El email no puede estar vacío o contener solo espacios en blanco.");
+                }
+
+                bool usuarioEncontrado = false;
+
+                foreach (var usuario in listaUsuarios)
+                {
+                    if (email == usuario.Email)
+                    {
+                        Console.WriteLine($"{usuario.Contrasena}");
+                        usuarioEncontrado = true;
+                        break;
+                    }
+                }
+
+                if (!usuarioEncontrado)
                 {
                     Console.WriteLine("No se encontró un usuario con ese email.");
-                    return;
                 }
 
                 Console.WriteLine("Presione una tecla para continuar:");
                 Console.ReadLine();
                 Menu.MenuPrincipal();
             }
-            
-         
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Presione una tecla para continuar:");
+                Console.ReadLine();
+                Menu.MenuPrincipal();
+            }
         }
-    }
 
+    }
 }
+
+
 
 
 

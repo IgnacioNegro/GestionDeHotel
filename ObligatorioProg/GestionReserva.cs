@@ -27,47 +27,6 @@ using System.Reflection.Metadata.Ecma335;
         }
 
 
-        private void PrecargarHabitaciones()
-        {
-            listaHabitaciones.Add(new Habitacion(101, "Simple", 1, 75.50m));
-            listaHabitaciones.Add(new Habitacion(102, "Doble", 2, 120.00m));
-            listaHabitaciones.Add(new Habitacion(103, "Triple", 3, 150.75m));
-            listaHabitaciones.Add(new Habitacion(104, "Suite", 2, 300.00m));
-            listaHabitaciones.Add(new Habitacion(105, "Doble", 2, 115.00m));
-            listaHabitaciones.Add(new Habitacion(201, "Simple", 1, 70.00m));
-            listaHabitaciones.Add(new Habitacion(202, "Suite Deluxe", 4, 500.00m));
-            listaHabitaciones.Add(new Habitacion(203, "Doble", 2, 125.50m));
-            listaHabitaciones.Add(new Habitacion(204, "Triple", 3, 160.00m));
-            listaHabitaciones.Add(new Habitacion(301, "Simple", 1, 85.00m));
-            listaHabitaciones.Add(new Habitacion(302, "Suite Junior", 2, 280.00m));
-            listaHabitaciones.Add(new Habitacion(303, "Doble", 2, 135.00m));
-            listaHabitaciones.Add(new Habitacion(304, "Suite Presidencial", 5, 1000.00m));
-            listaHabitaciones.Add(new Habitacion(401, "Simple", 1, 90.00m));
-            listaHabitaciones.Add(new Habitacion(402, "Doble Superior", 2, 150.00m));
-            listaHabitaciones.Add(new Habitacion(403, "Triple Deluxe", 3, 200.00m));
-            listaHabitaciones.Add(new Habitacion(404, "Suite Familiar", 4, 450.00m));
-            listaHabitaciones.Add(new Habitacion(501, "Penthouse", 6, 1500.00m));
-            listaHabitaciones.Add(new Habitacion(502, "Simple Económica", 1, 60.00m));
-            listaHabitaciones.Add(new Habitacion(503, "Doble Económica", 2, 100.00m));
-        
-
-        }
-
-        // MétodO para precargar reservas
-        public void PrecargarReservas()
-        {
-            listaReservas.Add(new Reserva(101, new DateTime(2024, 10, 25), new DateTime(2024, 10, 28), "juan.perez@example.com"));
-            listaReservas.Add(new Reserva(102, new DateTime(2024, 11, 1), new DateTime(2024, 11, 5), "maria.gonzalez@example.com"));
-            listaReservas.Add(new Reserva(103, new DateTime(2024, 10, 30), new DateTime(2024, 11, 2), "carlos.lopez@example.com"));
-            listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 15), new DateTime(2024, 12, 20), "ana.rodriguez@example.com"));
-            listaReservas.Add(new Reserva(104, new DateTime(2024, 12, 22), new DateTime(2024, 12, 28), "ana.rodriguez@example.com"));
-            listaReservas.Add(new Reserva(201, new DateTime(2025, 1, 5), new DateTime(2025, 1, 10), "pedro.martinez@example.com"));
-            listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 5), new DateTime(2025, 2, 10), "pedro.martinez@example.com"));
-            listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 20), new DateTime(2025, 2, 25), "admin"));
-            listaReservas.Add(new Reserva(204, new DateTime(2025, 2, 1), new DateTime(2024, 2, 5), "maria.gonzalez@example.com"));
-            listaReservas.Add(new Reserva(204, new DateTime(2025, 1, 25), new DateTime(2025, 1, 30), "admin"));
-        }
-
         // Listar las reservas actuales
         public void ListarReservas()
         {
