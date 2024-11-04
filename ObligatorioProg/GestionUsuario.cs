@@ -13,7 +13,10 @@ namespace ObligatorioProg
 
         public GestionUsuario()
         {
-            PrecargarUsuarios();
+            
+                Precarga precarga = new Precarga();
+                listaUsuarios = precarga.PrecargarUsuarios();
+            
         }
         public void RegistrarUsuario()
         {
@@ -64,6 +67,8 @@ namespace ObligatorioProg
                     Console.WriteLine("El correo no puede estar vacío. Intente de nuevo.");
                 }
             } while (string.IsNullOrWhiteSpace(correoElectronico));
+            
+        
 
             string? claveAcceso;
             do
@@ -153,12 +158,12 @@ namespace ObligatorioProg
                     Console.WriteLine("Sesión iniciada.");
                     Menu.SesionIniciada = true;
                     Menu.MenuPrincipal();
-                    sesionIniciada = true; // Cambia a verdadero para salir del bucle
+                    sesionIniciada = true; 
                 }
                 else
                 {
                     Console.WriteLine("Usuario o contraseña incorrectos. Intente de nuevo.");
-                    Console.WriteLine(""); // Espacio adicional para mayor claridad
+                    Console.WriteLine(""); 
                 }
             }
         }
