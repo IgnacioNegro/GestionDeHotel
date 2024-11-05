@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ObligatorioProg.GestionReservas">
+    <Position X="3.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAQAACAAABIAAEAAAAwCAqQCAAAAAIIAAAAAQ=</HashCode>
+      <FileName>GestionReserva.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.GestionUsuario">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAQAAAQFA=</HashCode>
+      <FileName>GestionUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.Persona">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAACQAAAAEAAgAgAAAAAAABAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Persona.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.Usuario">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.Habitacion">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAABCAAAAAQAAEAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Habitacion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.Reserva">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAEAAAIAAAEAAAAAAoABAAAAAAAAAAAgQAA=</HashCode>
+      <FileName>Reserva.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Precarga">
+    <Position X="0.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Precarga.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObligatorioProg.Menu">
+    <Position X="7.5" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAACAAAAAQEAAAQBBAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

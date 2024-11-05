@@ -175,16 +175,7 @@ namespace ObligatorioProg
         }
 
 
-        private void PrecargarUsuarios()
-        {
-            listaUsuarios.Add(new Usuario("Juan", "Pérez", new DateTime(1990, 1, 10), "juan.perez@example.com", "Uruguay", "CI", 12345678, 987654321, "password123"));
-            listaUsuarios.Add(new Usuario("María", "González", new DateTime(1995, 2, 20), "maria.gonzalez@example.com", "Argentina", "DNI", 87654321, 987123456, "mariaPass!"));
-            listaUsuarios.Add(new Usuario("Carlos", "López", new DateTime(1988, 3, 15), "carlos.lopez@example.com", "Chile", "RUT", 11223344, 987654123, "carlosSecure"));
-            listaUsuarios.Add(new Usuario("Ana", "Rodríguez", new DateTime(1992, 4, 25), "ana.rodriguez@example.com", "Perú", "DNI", 44332211, 985632147, "ana456"));
-            listaUsuarios.Add(new Usuario("Pedro", "Martínez", new DateTime(1985, 5, 5), "pedro.martinez@example.com", "Brasil", "CPF", 99887766, 984563214, "pedro@mart"));
-            listaUsuarios.Add(new Usuario("Admin", "Admin", new DateTime(1985, 5, 5), "admin", "Brasil", "CPF", 99887766, 984563214, "admin"));
-        }
-
+    
 
 
 

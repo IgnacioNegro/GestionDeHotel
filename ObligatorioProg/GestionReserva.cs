@@ -143,8 +143,8 @@ using System.Reflection.Metadata.Ecma335;
             //requisito de no tener reserva duplicada
 
             string emailCliente = GestionUsuario.usuarioActual.Email;
-            bool reservaDuplicada = listaReservas.Any(r =>
-                r.EmailCliente == emailCliente &&
+            bool reservaDuplicada = listaReservas.Any
+            (r =>r.EmailCliente == emailCliente &&
                 ((fechaLlegada >= r.FechaInicio && fechaLlegada < r.FechaFin) ||
                  (fechaSalida > r.FechaInicio && fechaSalida <= r.FechaFin))
             );
@@ -170,7 +170,7 @@ using System.Reflection.Metadata.Ecma335;
 
             Console.WriteLine("Presione una tecla para continuar.");
             Console.ReadLine();
-
+            Menu.MenuPrincipal();
         }
 
 
@@ -291,22 +291,35 @@ using System.Reflection.Metadata.Ecma335;
             Menu.MenuPrincipal();
         }
 
-        public void ListarHuespedes()
+    public void ListarHuespedes()
+    {
+        Console.Clear();
+        DateTime fechaHoy = DateTime.Today;
+        
+
+        foreach (var reserva in listaReservas)
         {
-            Console.Clear();
-            DateTime fechaHoy = DateTime.Today;
-
-            foreach (var reserva in listaReservas)
+            if (reserva.FechaInicio <= fechaHoy && reserva.FechaFin >= fechaHoy && reserva.EstaPagada)
             {
-                if (reserva.FechaInicio <= fechaHoy && reserva.FechaFin >= fechaHoy && reserva.EstaPagada)
-                {
 
-                    Console.WriteLine($"El usuario {reserva.EmailCliente} tiene una reserva {reserva.IDReserva}");
-                }
+                Console.WriteLine($"El usuario {reserva.EmailCliente} esta actualmente alojado y tiene una reserva {reserva.IDReserva}");
             }
+
+            else if (reserva.FechaFin < fechaHoy && reserva.EstaPagada)
+            {
+                Console.WriteLine($"El usuario {reserva.EmailCliente} se alojó previamente con la reserva {reserva.IDReserva}");
+            }
+
+
         }
 
-        public List<Reserva> ObtenerHistorialReservasPorEmail(string email)
+        Console.WriteLine("Presione una tecla para continuar.");
+        Console.ReadLine();
+        Menu.MenuPrincipal();
+
+    }
+
+    public List<Reserva> ObtenerHistorialReservasPorEmail(string email)
         {
             return listaReservas.Where(reserva => reserva.EmailCliente == email).ToList();
         }
@@ -348,6 +361,7 @@ using System.Reflection.Metadata.Ecma335;
 
         public void EjecutarPago()
         {
+            Console.Clear();
             Console.Write("Ingrese el número de reserva que desea pagar: ");
             string? numeror = Console.ReadLine();
             if (int.TryParse(numeror, out int numeroReserva))
@@ -379,11 +393,10 @@ using System.Reflection.Metadata.Ecma335;
 
 
 
-        public void GenerarComprobanteDePago(Reserva reserva)
-        {
-
-            Console.Clear();
-            string comprobante = "Comprobante de Pago\n" +
+    public void GenerarComprobanteDePago(Reserva reserva)
+    {
+        Console.Clear();
+        string comprobante = "Comprobante de Pago\n" +
                              "-------------------------------\n" +
                              "Número de Reserva: " + reserva.IDReserva + "\n" +
                              "Fechas: Desde " + reserva.FechaInicio.ToShortDateString() +
@@ -392,14 +405,17 @@ using System.Reflection.Metadata.Ecma335;
                              "Estado: " + (reserva.EstaPagada ? "Pagada" : "Pendiente") + "\n" +
                              "-------------------------------\n";
 
-            Console.WriteLine(comprobante);
-            Console.WriteLine("Ingrese una letra para continuar");
-            Console.ReadLine();
-            Menu.MenuPrincipal();
+        Console.WriteLine(comprobante);
+        string rutaArchivo = $"ComprobantePago_{reserva.IDReserva}.txt";
+        File.WriteAllText(rutaArchivo, comprobante);
 
-        }
+        Console.WriteLine($"El comprobante de pago se ha guardado en {rutaArchivo}");
+        Console.WriteLine("Ingrese una letra para continuar");
+        Console.ReadLine();  
+        Menu.MenuPrincipal();
+    }
 
-        public void MostrarHabitacionesMasReservadas()
+    public void MostrarHabitacionesMasReservadas()
         {
             Console.Clear();
             List<Habitacion> habitacionesMasReservadas = new List<Habitacion>();
