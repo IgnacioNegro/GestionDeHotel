@@ -67,26 +67,3 @@ while (!salir)
         Console.WriteLine("Por favor ingresa un número válido dentro de las opciones.");
     }
 }
-/*while (!salir)  PRIMER MENU SIN VALIDACION DE OPCIONES
-{
-    string? input = Console.ReadLine();
-
-    if (int.TryParse(input, out int opcion))
-    {
-        if (keyValuePairs.ContainsKey(opcion))
-        {
-         keyValuePairs[opcion]();
-         }
-        else
-        {
-            Console.WriteLine("Opción no válida");
-        }
-    }
-    else
-    {
-        Console.WriteLine("Por favor ingresa un número válido.");
-    }
-
-
-}
-*/

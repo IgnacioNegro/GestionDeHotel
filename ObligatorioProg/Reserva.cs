@@ -25,7 +25,7 @@ namespace ObligatorioProg
             NumeroHabitacion = numerohabitacion;
             FechaInicio = fechainicio;
             FechaFin = fechafin;
-            FechaReserva = Fechareserva;
+            FechaReserva = DateTime.Now;
             EmailCliente = emailCliente;
             EstaPagada = false;
         }
@@ -36,6 +36,7 @@ namespace ObligatorioProg
             NumeroHabitacion = numerohabitacion;
             FechaInicio = fechainicio;
             FechaFin = fechafin;
+            FechaReserva = DateTime.Now;
             EmailCliente = emailCliente;
             EstaPagada = false;
 

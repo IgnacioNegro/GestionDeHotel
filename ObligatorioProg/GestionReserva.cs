@@ -85,32 +85,33 @@ using System.Reflection.Metadata.Ecma335;
         //ReaLizar Reservas
         public void RealizarReserva()
         {
-            Console.Clear();
 
-            // Captura de las fechas de llegada y salida
-            Console.Write("Ingrese su fecha de llegada (dd/mm/yyyy): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out fechaLlegada))
-            {
-                Console.WriteLine("Fecha inválida.");
-                return;
-            }
+        Console.Clear();
+   
+         // Captura de las fechas de llegada y salida
+         Console.Write("Ingrese su fecha de llegada (dd/mm/yyyy): ");
+         if (!DateTime.TryParse(Console.ReadLine(), out fechaLlegada))
+         {
+             Console.WriteLine("Fecha inválida.");
+             return;
+         }
 
-            Console.Write("Ingrese su fecha de salida (dd/mm/yyyy): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out fechaSalida))
-            {
-                Console.WriteLine("Fecha inválida.");
-                return;
-            }
+         Console.Write("Ingrese su fecha de salida (dd/mm/yyyy): ");
+         if (!DateTime.TryParse(Console.ReadLine(), out fechaSalida))
+         {
+             Console.WriteLine("Fecha inválida.");
+             return;
+         }
 
-            // Validación del límite de 30 días
-            if ((fechaSalida - fechaLlegada).TotalDays > 30)
+        // Validación del límite de 30 días
+        if ((fechaSalida - fechaLlegada).TotalDays > 30)
             {
                 Console.WriteLine("No se puede realizar una reserva por más de 30 días.");
                 return;
             }
-
-
-            var habitacionesDisponibles = BuscarHabitacionesDisponiblesParaReserva(fechaLlegada, fechaSalida);
+               DateTime fechaReserva = DateTime.Now;
+        //muestra habitaciones disponibles
+        var habitacionesDisponibles = BuscarHabitacionesDisponiblesParaReserva(fechaLlegada, fechaSalida);
 
             if (habitacionesDisponibles.Count == 0)
             {
@@ -131,7 +132,7 @@ using System.Reflection.Metadata.Ecma335;
             }
 
 
-            // verra si la habitación elegida está dentro de las disponibles
+            // verra si la habitación elegida está dentro de las disponibles utilizando un método LINQ
             var habitacionSeleccionada = habitacionesDisponibles.FirstOrDefault(h => h.NumeroHabitacion == numeroHabitacion);
 
             if (habitacionSeleccionada == null)
@@ -140,25 +141,27 @@ using System.Reflection.Metadata.Ecma335;
                 return;
             }
 
-            //requisito de no tener reserva duplicada
-
-            string emailCliente = GestionUsuario.usuarioActual.Email;
-            bool reservaDuplicada = listaReservas.Any
-            (r =>r.EmailCliente == emailCliente &&
-                ((fechaLlegada >= r.FechaInicio && fechaLlegada < r.FechaFin) ||
-                 (fechaSalida > r.FechaInicio && fechaSalida <= r.FechaFin))
-            );
-
-            if (reservaDuplicada)
-            {
-                Console.WriteLine("Ya tiene una reserva activa para estas fechas.");
-                Console.ReadLine();
-                return;
-            }
-
-            // Crear la reserva y agregarla a la lista
-            var nuevaReserva = new Reserva(numeroHabitacion, fechaLlegada, fechaSalida, GestionUsuario.usuarioActual.Email);
+      
+      
+        // Requisito de no tener reserva duplicada
+        string emailCliente = GestionUsuario.usuarioActual.Email;
+        if (listaReservas.Any(r => r.EmailCliente == emailCliente &&
+      (fechaLlegada < r.FechaFin && fechaSalida > r.FechaInicio) ||       // cuando coinciden en el medio
+      (fechaLlegada == r.FechaFin) ||                                    // el nuevo checkin es justo cuando termina una reserva
+      (fechaSalida == r.FechaInicio)                                      // el nuevo checkout es justo cuando empieza una reserva
+  ))
+        {
+            Console.WriteLine("Las fechas de la reserva se superponen con una reserva existente. Serás redirigido al Menu Principal.");
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Reserva permitida.");
+        }
+        // Crear la reserva y agregarla a la lista
+        var nuevaReserva = new Reserva(numeroHabitacion, fechaLlegada, fechaSalida, GestionUsuario.usuarioActual.Email);
             listaReservas.Add(nuevaReserva);
+        Console.Clear();
 
             Console.WriteLine("Reserva creada con los siguientes detalles:");
             Console.WriteLine($"ID Reserva: {nuevaReserva.IDReserva}");
